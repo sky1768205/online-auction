@@ -1,0 +1,16 @@
+.DS_Store
+*.log
+
+# Зависимости и сборка
+node_modules/
+frontend/dist/
+
+# Загруженные пользователями файлы
+backend/uploads/
+uploads/
+
+# Локальные настройки редактора и инструментов
+.claude/
+.idea/
+.vscode/
+.env

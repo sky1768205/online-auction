@@ -1,0 +1,406 @@
+/*
+ * Дизайн-система «Лот» — стилистика музейного сайта:
+ * много воздуха, прямые углы, тонкие линии, бронзовый акцент,
+ * гротеск Manrope для текста и антиква Cormorant Garamond для цен, дат и цифр.
+ * Тема задаётся атрибутом data-theme на <html> (см. index.html и useTheme).
+ */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f5f2ed;
+  --border: #e7e2da;
+  --border-strong: #cfc8bd;
+  --text: #161616;
+  --text-2: #333333;
+  --muted: #7d766c;
+  --accent: #b4966e;
+  --accent-hover: #9c7f58;
+  --accent-soft: #f4ede3;
+  --on-accent: #ffffff;
+  --success: #4c7a58;
+  --success-soft: #e7f0e9;
+  --danger: #b4483a;
+  --danger-soft: #f8e7e3;
+  --inverse-bg: #161616;
+  --inverse-text: #f3efe8;
+  --radius: 0px;
+  --shadow: none;
+  --shadow-float: 0 12px 40px rgb(0 0 0 / 0.12);
+  --font: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --serif: 'Cormorant Garamond', 'PT Serif', Georgia, serif;
+  --header-h: 72px;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #111111;
+  --surface: #181818;
+  --surface-2: #202020;
+  --border: #2d2b28;
+  --border-strong: #46423c;
+  --text: #f1ece4;
+  --text-2: #d9d3c9;
+  --muted: #9a9389;
+  --accent: #c4a77f;
+  --accent-hover: #d6bc96;
+  --accent-soft: #2a241c;
+  --on-accent: #161616;
+  --success: #86b893;
+  --success-soft: #1c2a20;
+  --danger: #e2806f;
+  --danger-soft: #341f1b;
+  --inverse-bg: #f1ece4;
+  --inverse-text: #161616;
+  --shadow-float: 0 12px 40px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-2);
+  font: 16px/1.55 var(--font);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s, color 0.25s;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ---------- Типографика ---------- */
+
+.display {
+  font-size: clamp(36px, 5.2vw, 64px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.section-title {
+  font-size: clamp(28px, 3.2vw, 38px);
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.serif {
+  font-family: var(--serif);
+  font-variant-numeric: lining-nums;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  transition: gap 0.2s, color 0.2s;
+}
+
+.link-arrow:hover {
+  gap: 16px;
+  color: var(--accent);
+}
+
+/* ---------- Карточки и поверхности ---------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------- Кнопки ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 26px;
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--text);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* Контурная кнопка поверх фотографии */
+.btn-ghost-light {
+  border-color: rgb(255 255 255 / 0.7);
+  color: #fff;
+}
+
+.btn-ghost-light:hover:not(:disabled) {
+  border-color: #fff;
+  background: rgb(255 255 255 / 0.1);
+}
+
+.btn-sm {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 11px;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.icon-btn:hover {
+  color: var(--accent);
+}
+
+/* ---------- Формы ---------- */
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  transition: border-color 0.2s;
+}
+
+.textarea {
+  height: auto;
+  min-height: 140px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--muted);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* Строка поиска «как на музейных сайтах» — только нижняя линия */
+.input-line {
+  border-width: 0 0 1px;
+  padding: 0 2px;
+  background: transparent;
+}
+
+.input-line:focus {
+  box-shadow: inset 0 -1px 0 var(--accent);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field > span {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Сообщения и метки ---------- */
+
+.alert {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-left: 2px solid currentColor;
+  background: var(--surface-2);
+}
+
+.alert-error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.alert-success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.badge-accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.badge-success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge-danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ---------- Анимации ---------- */
+
+@keyframes flash {
+  from {
+    background: var(--accent-soft);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+.flash {
+  animation: flash 1.2s ease-out;
+}
+
+/* Скелетоны — заглушки на время загрузки */
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+/* Убираем стрелки у числовых полей */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-h: 56px;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  /* 16px в полях — иначе iOS увеличивает страницу при фокусе */
+  .input,
+  .select,
+  .textarea {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
